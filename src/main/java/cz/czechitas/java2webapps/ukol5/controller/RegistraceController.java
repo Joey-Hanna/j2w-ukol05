@@ -31,6 +31,18 @@ public class RegistraceController {
     @PostMapping("")
     public Object form(@Valid @ModelAttribute("form") RegistraceForm form, BindingResult bindingResult) {
 
+        Period period = form.getDatumNarozeni().until(LocalDate.now());
+        int vek = period.getYears();
+
+        if (vek < 9) {
+            return "/nevyhovujici-vek";
+        }
+
+        if (vek > 15){
+            return "/nevyhovujici-vek";
+        }
+
+
         if (bindingResult.hasErrors()) {
             return "/formular";
         }
@@ -41,14 +53,6 @@ public class RegistraceController {
     @PostMapping("/local-date")
     public void localDate(@RequestParam("localDate")
                           @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate localDate) {
-
-        /*Period period = datumNarozeni.until(LocalDate.now());
-        int vek = period.getYears();
-
-        if (vek < 9 && vek > 15) {
-            System.out.println("Dite nesmi byt mladsi 9 let a starsi 15 let.");
-        }*/
-
     }
 }
 
