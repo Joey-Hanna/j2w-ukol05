@@ -1,8 +1,9 @@
 package cz.czechitas.java2webapps.ukol5.controller;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.validation.constraints.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  */
@@ -13,8 +14,8 @@ public class RegistraceForm {
     @NotBlank
     @Size(min = 3, max = 150)
     private String prijmeni;
-    @NotBlank
-    private String datumNarozeni;
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    private LocalDate datumNarozeni;
     @NotBlank
     private String pohlavi;
     @NotBlank
@@ -39,11 +40,11 @@ public class RegistraceForm {
         this.prijmeni = prijmeni;
     }
 
-    public String getDatumNarozeni() {
+    public LocalDate getDatumNarozeni() {
         return datumNarozeni;
     }
 
-    public void setDatumNarozeni(String datumNarozeni) {
+    public void setDatumNarozeni(LocalDate datumNarozeni) {
         this.datumNarozeni = datumNarozeni;
     }
 
